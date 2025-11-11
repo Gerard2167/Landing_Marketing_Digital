@@ -13,9 +13,22 @@
     <div class="thank-you-container">
         <div class="thank-you-box">
             <div class="checkmark">✓</div>
-            <h1>¡Todo listo!</h1>
-            <p>Gracias por tu interés. Hemos enviado la guía a tu correo electrónico. ¡Revisa tu bandeja de entrada (y de spam, por si acaso)!</p>
+            <h1>¡Gracias por registrarte!</h1>
+            <p>Tu descarga comenzará automáticamente. Si no es así, haz clic en el botón de abajo para obtener tu guía.</p>
+            <a href="https://github.com/Gerard2167/Landing_Herramientas_Markwting_Digital/raw/main/Gu%C3%ADa%207%20herrmientas%20de%20Marketing%20Digital.pdf" class="cta-button" download>Descargar la Guía</a>
         </div>
     </div>
+    <script>
+        window.addEventListener('load', function() {
+            // Inicia la descarga automáticamente
+            const url = "https://github.com/Gerard2167/Landing_Herramientas_Markwting_Digital/raw/main/Gu%C3%ADa%207%20herrmientas%20de%20Marketing%20Digital.pdf";
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'Guía 7 herrmientas de Marketing Digital.pdf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
 </body>
 </html>
