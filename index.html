@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descarga tu Guía de Marketing Digital</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sticker-container"></div>
+    <div class="container">
+        <header>
+            <h1>¡Estás a un paso de potenciar tu marketing!</h1>
+            <p>Regístrate para recibir la 🚀 guía gratuita con las 7 herramientas de marketing digital.</p>
+        </header>
+        <main>
+            <form action="https://formspree.io/f/mldaeben" method="POST">
+                <input type="hidden" name="_next" value="https://landing-herramientas-markwting-digital.vercel.app/thankyou.html">
+                <div class="form-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                </div>
+                <button type="submit" class="cta-button">Descargar ahora</button>
+            </form>
+        </main>
+    </div>
+    <script>
+        // Script para generar stickers animados
+        const stickerContainer = document.querySelector('.sticker-container');
+        const stickers = ['📈', '💡', '🎯', '✉️', '🚀', '💰', '📊', '👍', '🔥'];
+        const stickerCount = 20;
+
+        for (let i = 0; i < stickerCount; i++) {
+            const sticker = document.createElement('div');
+            sticker.classList.add('sticker');
+            sticker.innerText = stickers[Math.floor(Math.random() * stickers.length)];
+            sticker.style.left = `${Math.random() * 100}vw`;
+            sticker.style.animationDuration = `${Math.random() * 10 + 5}s`; // Duración entre 5 y 15 segundos
+            sticker.style.animationDelay = `${Math.random() * 5}s`;
+            sticker.style.fontSize = `${Math.random() * 20 + 15}px`;
+            stickerContainer.appendChild(sticker);
+        }
+    </script>
+</body>
+</html>
