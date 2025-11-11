@@ -17,8 +17,7 @@
             <p>Regístrate para recibir la 🚀 guía gratuita con las 7 herramientas de marketing digital.</p>
         </header>
         <main>
-            <form action="https://formspree.io/f/mldaeben" method="POST">
-                <input type="hidden" name="_next" value="https://landing-herramientas-markwting-digital.vercel.app/thankyou.html">
+            <form id="contact-form">
                 <div class="form-group">
                     <label for="name">Nombre</label>
                     <input type="text" id="name" name="name" placeholder="Tu nombre" required>
@@ -27,12 +26,13 @@
                     <label for="email">Correo Electrónico</label>
                     <input type="email" id="email" name="email" placeholder="tu@email.com" required>
                 </div>
-                <button type="submit" class="cta-button">Descargar ahora</button>
+                <button type="submit" class="cta-button" id="submit-button">Descargar ahora</button>
+                <p id="status-message" style="display: none; margin-top: 15px;"></p>
             </form>
         </main>
     </div>
     <script>
-        // Script para generar stickers animados
+        // Script para generar stickers animados (existente)
         const stickerContainer = document.querySelector('.sticker-container');
         const stickers = ['📈', '💡', '🎯', '✉️', '🚀', '💰', '📊', '👍', '🔥'];
         const stickerCount = 20;
@@ -42,11 +42,51 @@
             sticker.classList.add('sticker');
             sticker.innerText = stickers[Math.floor(Math.random() * stickers.length)];
             sticker.style.left = `${Math.random() * 100}vw`;
-            sticker.style.animationDuration = `${Math.random() * 10 + 5}s`; // Duración entre 5 y 15 segundos
+            sticker.style.animationDuration = `${Math.random() * 10 + 5}s`;
             sticker.style.animationDelay = `${Math.random() * 5}s`;
             sticker.style.fontSize = `${Math.random() * 20 + 15}px`;
             stickerContainer.appendChild(sticker);
         }
+
+        // Script para manejar el envío del formulario
+        const form = document.getElementById('contact-form');
+        const submitButton = document.getElementById('submit-button');
+        const statusMessage = document.getElementById('status-message');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            submitButton.disabled = true;
+            submitButton.innerText = 'Enviando...';
+            statusMessage.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email }),
+                });
+
+                if (response.ok) {
+                    // Redirigir a la página de agradecimiento si todo fue bien
+                    window.location.href = '/thankyou.html';
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Ocurrió un error al enviar el correo.');
+                }
+            } catch (error) {
+                statusMessage.innerText = 'Error: ' + error.message;
+                statusMessage.style.color = 'red';
+                statusMessage.style.display = 'block';
+                submitButton.disabled = false;
+                submitButton.innerText = 'Descargar ahora';
+            }
+        });
     </script>
 </body>
 </html>

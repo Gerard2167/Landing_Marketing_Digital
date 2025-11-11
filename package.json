@@ -1,0 +1,12 @@
+{
+  "name": "landing-page-backend",
+  "version": "1.0.0",
+  "description": "Backend for sending emails from the landing page.",
+  "main": "api/send-email.js",
+  "scripts": {
+    "start": "node api/send-email.js"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.3"
+  }
+}
